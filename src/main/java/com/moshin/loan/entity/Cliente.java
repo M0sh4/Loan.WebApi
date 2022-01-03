@@ -10,11 +10,17 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "cliente")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Cliente {
     @Id
     private String cDNI;
@@ -36,5 +42,6 @@ public class Cliente {
     @Column(length = 250)
     private String cFoto;
     @Column
+    @JsonFormat( pattern = "yyyy-MM-dd")
     private Date dtFechaReg;
 }
