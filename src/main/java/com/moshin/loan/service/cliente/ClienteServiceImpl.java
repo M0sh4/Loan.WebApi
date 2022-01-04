@@ -1,5 +1,4 @@
-package com.moshin.loan.service;
-
+package com.moshin.loan.service.cliente;
 import java.util.Optional;
 
 import com.moshin.loan.entity.Cliente;

@@ -3,7 +3,7 @@ package com.moshin.loan.controller;
 import java.util.Optional;
 
 import com.moshin.loan.entity.Cliente;
-import com.moshin.loan.service.ClienteService;
+import com.moshin.loan.service.cliente.ClienteService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,7 +28,7 @@ public class ClienteController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> readCliente(@PathVariable String id){
+    public ResponseEntity<Optional<Cliente>> readCliente(@PathVariable String id){
         Optional<Cliente> oCliente = clienteService.findById(id);
         if(!oCliente.isPresent()){
             return ResponseEntity.notFound().build();
