@@ -32,6 +32,10 @@ public class ListaNegra {
 
     @Column(length = 150)
     private String cRazon;
+
+    @Column(length = 1)
+    private String cEstado;
+    
     @Column
     private Date dtFechaReg;
 }

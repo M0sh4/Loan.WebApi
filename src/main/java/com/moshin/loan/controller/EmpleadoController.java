@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -31,26 +32,20 @@ public class EmpleadoController {
     }
 
     @PostMapping(value="/delete")
-    public ResponseEntity<Boolean> postMethodName(@RequestBody String cDni) {
+    public ResponseEntity<Boolean> postMethodName(@RequestParam String cDni) {
         boolean res = empleadoService.logicalDelete(cDni).getCEstado().equals("0");
         return ResponseEntity.ok(res);
     }
     
     @GetMapping("/byRuc/{id}")
     public ResponseEntity<List<Empleado>> getEmpleadoByRuc(@PathParam("id") String cRuc){
-        List<Empleado> listEmp = empleadoService.readEmpleado(cRuc);
-        if(listEmp.isEmpty()){
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(listEmp);
+        List<Empleado> listEmp = empleadoService.getEmpleado(cRuc);
+        return listEmp.isEmpty()? ResponseEntity.notFound().build(): ResponseEntity.ok(listEmp);
     }
 
     @GetMapping("/byDni/{id}")
     public ResponseEntity<Empleado> getEmpleadoByDni(@PathParam("id") String cDni){
-        Empleado emp = empleadoService.readEmpleadoByDni(cDni);
-        if(emp.getCDNI().isEmpty()){
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(emp);
+        Empleado emp = empleadoService.getEmpleadoByDni(cDni);
+        return emp.getCDNI().isEmpty()? ResponseEntity.notFound().build(): ResponseEntity.ok(emp);
     }
 }

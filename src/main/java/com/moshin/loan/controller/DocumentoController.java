@@ -32,15 +32,12 @@ public class DocumentoController {
     @GetMapping(name = "/{id}")
     public ResponseEntity<List<Documento>> readDocByCliente(@PathParam("id") String cDni){
         List<Documento> listDoc = documentoService.getDocumentoByCliente(cDni);
-        if(listDoc.isEmpty()){
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(listDoc);
+        return listDoc.isEmpty()? ResponseEntity.notFound().build(): ResponseEntity.ok(listDoc);
     }
 
     @PostMapping
     public ResponseEntity<Boolean> deleteDocumento(@RequestParam Long id){
         boolean res = documentoService.delete(id);
-        return res?ResponseEntity.ok(res): ResponseEntity.notFound().build();
+        return res? ResponseEntity.ok(res): ResponseEntity.notFound().build();
     }
 }

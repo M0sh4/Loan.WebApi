@@ -30,10 +30,6 @@ public class ClienteController {
     @GetMapping("/{id}")
     public ResponseEntity<Optional<Cliente>> readCliente(@PathVariable String id){
         Optional<Cliente> oCliente = clienteService.findById(id);
-        if(!oCliente.isPresent()){
-            return ResponseEntity.notFound().build();
-        }
-
-        return ResponseEntity.ok(oCliente);
+        return oCliente.isPresent()? ResponseEntity.ok(oCliente): ResponseEntity.notFound().build();
     }
 }

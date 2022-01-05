@@ -9,7 +9,7 @@ public interface EmpleadoService {
 
     public Empleado logicalDelete(String cDni);
 
-    public List<Empleado> readEmpleado(String cRuc);
+    public List<Empleado> getEmpleado(String cRuc);
 
-    public Empleado readEmpleadoByDni(String cDni);
+    public Empleado getEmpleadoByDni(String cDni);
 }

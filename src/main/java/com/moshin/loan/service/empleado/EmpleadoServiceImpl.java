@@ -31,7 +31,7 @@ public class EmpleadoServiceImpl implements EmpleadoService{
 
     @Override
     @Transactional(readOnly = true)
-    public List<Empleado> readEmpleado(String cRuc) {
+    public List<Empleado> getEmpleado(String cRuc) {
         List<Empleado> listEmp = new ArrayList<>();
         empleadoRepository.findAll().forEach(empleado ->{
             if(empleado.getEmpresa().getCRUC().equals(cRuc)){
@@ -43,7 +43,7 @@ public class EmpleadoServiceImpl implements EmpleadoService{
 
     @Override
     @Transactional(readOnly = true)
-    public Empleado readEmpleadoByDni(String cDni) {
+    public Empleado getEmpleadoByDni(String cDni) {
         return empleadoRepository.getById(cDni);
     }
     

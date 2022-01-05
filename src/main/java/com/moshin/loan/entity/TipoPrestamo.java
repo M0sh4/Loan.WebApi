@@ -22,9 +22,7 @@ public class TipoPrestamo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long nId;
     
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "nIdPorcentaje")
-    private Porcentaje porcentaje;
+    private String cPorcentaje;
     
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "cRuc")
