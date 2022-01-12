@@ -11,6 +11,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,10 +24,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Cliente {
     @Id
+    @Column(length = 8)
     private String cDNI;
     
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "nIdUsu")
+    @OneToOne(cascade = CascadeType.REFRESH)
+    @JoinColumn(name = "nIdUsu", referencedColumnName = "nId")
+    @JsonManagedReference(value = "cliente-usuario")
     private Usuario usuario;
 
     @Column(length = 50)

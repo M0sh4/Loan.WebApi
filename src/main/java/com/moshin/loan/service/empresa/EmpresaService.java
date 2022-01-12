@@ -1,6 +1,7 @@
 package com.moshin.loan.service.empresa;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.moshin.loan.entity.Empresa;
 
@@ -10,7 +11,7 @@ public interface EmpresaService {
 
     public List<Empresa> getEmpresa();
 
-    public Empresa getEmpresaByRuc(String cRuc);
+    public Optional<Empresa> getEmpresaByRuc(String cRuc);
 
 
 }

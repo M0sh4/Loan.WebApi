@@ -27,7 +27,7 @@ public class TipoPrestamoServiceImpl implements TipoPrestamoService {
     public List<TipoPrestamo> getTipoByRuc(String cRuc) {
         List<TipoPrestamo> listTipo = new ArrayList<>();
         tipoPrestamoRepository.findAll().forEach(tipoPrestamo->{
-            if(tipoPrestamo.getEmpresa().getCRUC().equals("cRuc")){
+            if(tipoPrestamo.getEmpresa().getCRUC().equals(cRuc)){
                 listTipo.add(tipoPrestamo);
             }
         });

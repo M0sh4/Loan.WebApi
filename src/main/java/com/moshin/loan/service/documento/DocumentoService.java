@@ -8,7 +8,7 @@ public interface DocumentoService {
 
     public Documento save(Documento documento);
 
-    public List<Documento> getDocumentoByCliente(String cDni);
+    public List<Documento> getDocumentoByCliente(String cDni, String cRuc);
 
     public boolean delete(Long id);
 }

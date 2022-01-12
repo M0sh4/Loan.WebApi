@@ -2,7 +2,6 @@ package com.moshin.loan.controller;
 
 import java.util.List;
 
-import javax.websocket.server.PathParam;
 
 import com.moshin.loan.entity.Pago;
 import com.moshin.loan.service.pago.PagoService;
@@ -11,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,7 +31,7 @@ public class PagoController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<List<Pago>> getPagoByPrestamo(@PathParam("id") Long idPrestamo){
+    public ResponseEntity<List<Pago>> getPagoByPrestamo(@PathVariable("id") Long idPrestamo){
         List<Pago> resPago = pagoService.getPagoByPrestamo(idPrestamo);
         return resPago.isEmpty()? ResponseEntity.notFound().build(): ResponseEntity.ok(resPago);
     }
@@ -39,6 +39,6 @@ public class PagoController {
     @PostMapping("/delete")
     public ResponseEntity<Boolean> logicalDelete(@RequestParam Long id){
         Pago pago = pagoService.logicalDelete(id);
-        return pago.getCEstado().equals("0")? ResponseEntity.notFound().build(): ResponseEntity.ok(true);
+        return !pago.getCEstado().equals("0")? ResponseEntity.notFound().build(): ResponseEntity.ok(true);
     }
 }

@@ -18,10 +18,10 @@ public class DocumentoServiceImpl implements DocumentoService{
 
     @Override
     @Transactional(readOnly = true)
-    public List<Documento> getDocumentoByCliente(String cDni) {
+    public List<Documento> getDocumentoByCliente(String cDni, String cRuc) {
         ArrayList<Documento> listDocumento = new ArrayList<>();
         documentoRepository.findAll().forEach(documento ->{
-            if(documento.getCliente().getCDNI().equals(cDni)){
+            if(documento.getCliente().getCDNI().equals(cDni) && documento.getEmpresa().getCRUC().equals(cRuc)){
                 listDocumento.add(documento);
             }
         });

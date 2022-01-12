@@ -3,13 +3,16 @@ package com.moshin.loan.service.empleado;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import com.moshin.loan.entity.Empleado;
 import com.moshin.loan.repository.EmpleadoRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+@Service
 public class EmpleadoServiceImpl implements EmpleadoService{
 
     @Autowired
@@ -43,8 +46,8 @@ public class EmpleadoServiceImpl implements EmpleadoService{
 
     @Override
     @Transactional(readOnly = true)
-    public Empleado getEmpleadoByDni(String cDni) {
-        return empleadoRepository.getById(cDni);
+    public Optional<Empleado> getEmpleadoByDni(String cDni) {
+        return empleadoRepository.findById(cDni);
     }
     
 }

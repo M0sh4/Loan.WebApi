@@ -12,21 +12,25 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "prestamo")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Prestamo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long nId;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "cDni")
     private Cliente cliente;
     
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "cRuc")
     private Empresa empresa;
 
@@ -39,7 +43,7 @@ public class Prestamo {
     @Column(length = 1)
     private String cEstado;
  
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "nIdTipoPrestamo")
     private TipoPrestamo tipoPrestamo;
 }

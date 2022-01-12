@@ -1,6 +1,7 @@
 package com.moshin.loan.service.empresa;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.moshin.loan.entity.Empresa;
 import com.moshin.loan.repository.EmpresaRepository;
@@ -29,8 +30,8 @@ public class EmpresaServiceImpl implements EmpresaService{
 
     @Override
     @Transactional(readOnly = true)
-    public Empresa getEmpresaByRuc(String cRuc) {
-        return empresaRepository.getById(cRuc);
+    public Optional<Empresa> getEmpresaByRuc(String cRuc) {
+        return empresaRepository.findById(cRuc);
     }
     
 }

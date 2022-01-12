@@ -2,7 +2,6 @@ package com.moshin.loan.controller;
 
 import java.util.List;
 
-import javax.websocket.server.PathParam;
 
 import com.moshin.loan.entity.ListaNegra;
 import com.moshin.loan.service.lista_negra.ListaNegraService;
@@ -16,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 
 @RestController
@@ -32,7 +32,7 @@ public class ListaNegraController {
     }
     
     @GetMapping("/byRuc/{id}")
-    public ResponseEntity<List<ListaNegra>> getListByRuc(@PathParam("id") String cRuc) {
+    public ResponseEntity<List<ListaNegra>> getListByRuc(@PathVariable("id") String cRuc) {
         List<ListaNegra> resList = listaNegraService.getListByRuc(cRuc);
         return resList.isEmpty()? ResponseEntity.notFound().build(): ResponseEntity.ok(resList);
     }

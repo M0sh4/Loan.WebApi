@@ -1,6 +1,7 @@
 package com.moshin.loan.service.empleado;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.moshin.loan.entity.Empleado;
 
@@ -11,5 +12,5 @@ public interface EmpleadoService {
 
     public List<Empleado> getEmpleado(String cRuc);
 
-    public Empleado getEmpleadoByDni(String cDni);
+    public Optional<Empleado> getEmpleadoByDni(String cDni);
 }
