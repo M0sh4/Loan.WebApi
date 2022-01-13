@@ -1,4 +1,4 @@
-package com.moshin.loan.entity;
+package com.moshin.loan.entity.table;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -10,6 +10,9 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import org.springframework.data.annotation.Transient;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -3,7 +3,7 @@ package com.moshin.loan.service.empleado;
 import java.util.List;
 import java.util.Optional;
 
-import com.moshin.loan.entity.Empleado;
+import com.moshin.loan.entity.table.Empleado;
 
 public interface EmpleadoService {
     public Empleado save(Empleado empleado);

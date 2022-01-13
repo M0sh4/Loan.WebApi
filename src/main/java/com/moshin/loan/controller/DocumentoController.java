@@ -2,7 +2,7 @@ package com.moshin.loan.controller;
 
 import java.util.List;
 
-import com.moshin.loan.entity.Documento;
+import com.moshin.loan.entity.table.Documento;
 import com.moshin.loan.service.documento.DocumentoService;
 
 import org.springframework.beans.factory.annotation.Autowired;

@@ -2,7 +2,7 @@ package com.moshin.loan.service.prestamo;
 
 import java.util.List;
 
-import com.moshin.loan.entity.Prestamo;
+import com.moshin.loan.entity.table.Prestamo;
 
 public interface PrestamoService {
     

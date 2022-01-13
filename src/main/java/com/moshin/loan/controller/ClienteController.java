@@ -2,7 +2,7 @@ package com.moshin.loan.controller;
 
 import java.util.Optional;
 
-import com.moshin.loan.entity.Cliente;
+import com.moshin.loan.entity.table.Cliente;
 import com.moshin.loan.service.cliente.ClienteService;
 
 import org.springframework.beans.factory.annotation.Autowired;

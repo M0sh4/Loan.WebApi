@@ -3,7 +3,7 @@ package com.moshin.loan.service.prestamo;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.moshin.loan.entity.Prestamo;
+import com.moshin.loan.entity.table.Prestamo;
 import com.moshin.loan.repository.PrestamoRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;

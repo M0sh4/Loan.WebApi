@@ -2,7 +2,7 @@ package com.moshin.loan.service.pago;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.moshin.loan.entity.Pago;
+import com.moshin.loan.entity.table.Pago;
 import com.moshin.loan.repository.PagoRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;

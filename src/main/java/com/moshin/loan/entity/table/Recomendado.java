@@ -1,4 +1,4 @@
-package com.moshin.loan.entity;
+package com.moshin.loan.entity.table;
 
 import java.util.Date;
 

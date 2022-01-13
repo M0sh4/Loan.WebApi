@@ -3,7 +3,7 @@ package com.moshin.loan.service.lista_negra;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.moshin.loan.entity.ListaNegra;
+import com.moshin.loan.entity.table.ListaNegra;
 import com.moshin.loan.repository.ListaNegraRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;

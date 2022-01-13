@@ -3,7 +3,7 @@ package com.moshin.loan.service.documento;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.moshin.loan.entity.Documento;
+import com.moshin.loan.entity.table.Documento;
 import com.moshin.loan.repository.DocumentoRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;

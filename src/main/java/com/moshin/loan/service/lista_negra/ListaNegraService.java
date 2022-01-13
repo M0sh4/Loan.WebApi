@@ -2,7 +2,7 @@ package com.moshin.loan.service.lista_negra;
 
 import java.util.List;
 
-import com.moshin.loan.entity.ListaNegra;
+import com.moshin.loan.entity.table.ListaNegra;
 
 public interface ListaNegraService {
     public ListaNegra saveList(ListaNegra listaNegra);

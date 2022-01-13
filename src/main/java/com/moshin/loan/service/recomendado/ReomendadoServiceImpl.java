@@ -3,7 +3,7 @@ package com.moshin.loan.service.recomendado;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.moshin.loan.entity.Recomendado;
+import com.moshin.loan.entity.table.Recomendado;
 import com.moshin.loan.repository.RecomendadoRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;

@@ -2,8 +2,7 @@ package com.moshin.loan.controller;
 
 import java.util.List;
 
-
-import com.moshin.loan.entity.TipoPrestamo;
+import com.moshin.loan.entity.table.TipoPrestamo;
 import com.moshin.loan.service.tipo_prestamo.TipoPrestamoService;
 
 import org.springframework.beans.factory.annotation.Autowired;

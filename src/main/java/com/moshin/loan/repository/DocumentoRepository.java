@@ -1,6 +1,6 @@
 package com.moshin.loan.repository;
 
-import com.moshin.loan.entity.Documento;
+import com.moshin.loan.entity.table.Documento;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

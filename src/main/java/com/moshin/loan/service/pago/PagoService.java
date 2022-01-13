@@ -2,7 +2,7 @@ package com.moshin.loan.service.pago;
 
 import java.util.List;
 
-import com.moshin.loan.entity.Pago;
+import com.moshin.loan.entity.table.Pago;
 
 public interface PagoService {
     

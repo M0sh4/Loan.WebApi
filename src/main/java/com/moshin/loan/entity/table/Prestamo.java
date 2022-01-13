@@ -1,4 +1,4 @@
-package com.moshin.loan.entity;
+package com.moshin.loan.entity.table;
 
 import java.util.Date;
 
@@ -17,11 +17,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "lista_negra")
+@Table(name = "prestamo")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ListaNegra {
+public class Prestamo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long nId;
@@ -34,12 +34,16 @@ public class ListaNegra {
     @JoinColumn(name = "cRuc")
     private Empresa empresa;
 
-    @Column(length = 150)
-    private String cRazon;
-
+    @Column
+    private String nMonto;
+    @Column
+    private Date dtFechaIni;
+    @Column
+    private Date dtFechaFin;
     @Column(length = 1)
     private String cEstado;
-    
-    @Column
-    private Date dtFechaReg;
+ 
+    @ManyToOne(cascade = CascadeType.REFRESH)
+    @JoinColumn(name = "nIdTipoPrestamo")
+    private TipoPrestamo tipoPrestamo;
 }

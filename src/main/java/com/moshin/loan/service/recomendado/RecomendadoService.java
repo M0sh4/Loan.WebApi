@@ -2,7 +2,7 @@ package com.moshin.loan.service.recomendado;
 
 import java.util.List;
 
-import com.moshin.loan.entity.Recomendado;
+import com.moshin.loan.entity.table.Recomendado;
 
 public interface RecomendadoService {
     

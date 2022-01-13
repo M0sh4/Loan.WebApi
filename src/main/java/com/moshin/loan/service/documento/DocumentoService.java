@@ -2,7 +2,7 @@ package com.moshin.loan.service.documento;
 
 import java.util.List;
 
-import com.moshin.loan.entity.Documento;
+import com.moshin.loan.entity.table.Documento;
 
 public interface DocumentoService {
 

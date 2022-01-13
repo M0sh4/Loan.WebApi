@@ -1,4 +1,4 @@
-package com.moshin.loan.entity;
+package com.moshin.loan.entity.table;
 
 import java.util.Date;
 
@@ -12,26 +12,30 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "tipo_prestamo")
+@Table(name = "documento")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class TipoPrestamo {
+public class Documento {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long nId;
     
-    private String cPorcentaje;
+    @ManyToOne(cascade = CascadeType.REFRESH)
+    @JoinColumn(name = "cDni")
+    private Cliente cliente;
     
     @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "cRuc")
     private Empresa empresa;
-
+    
     @Column(length = 150)
     private String cNombre;
     @Column

@@ -3,10 +3,14 @@ package com.moshin.loan.service.usuario;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.moshin.loan.entity.Usuario;
+import com.moshin.loan.entity.JwtResponse;
+import com.moshin.loan.entity.table.Usuario;
 import com.moshin.loan.repository.UsuarioRepository;
+import com.moshin.loan.security.JwtIO;
+import com.moshin.loan.util.DateUtils;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,6 +19,12 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Autowired
     UsuarioRepository usuarioRepository;
+    @Autowired
+    private JwtIO jwtIO;
+    @Autowired
+    private DateUtils dateUtils;
+    @Value("${moshin.jwt.token.expires-in}")
+    private int EXPIRES_IN;
 
     @Override
     @Transactional
@@ -24,14 +34,16 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Override
     @Transactional(readOnly = true)
-    public Usuario login(String cUsu, String cContra) {
+    public JwtResponse login(String cUsu, String cContra) {
         List<Usuario> listUsu = new ArrayList<>();
         usuarioRepository.findAll().forEach(usuario->{
             if(usuario.getCContrasena().equals(cContra)&& usuario.getCUsuario().equals(cUsu)){
                 listUsu.add(0,usuario);
+                return;
             }
         });
-        return listUsu.get(0);
+        return JwtResponse.builder().tokenType("bearer").accessToken(jwtIO.generateToken("MOSHIN")).issuedAt(dateUtils.getDateMillis()+"")
+                .userId(listUsu.get(0).getNId()).expiresIn(EXPIRES_IN).build();
     }
     
 }

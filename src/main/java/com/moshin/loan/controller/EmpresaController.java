@@ -3,7 +3,7 @@ package com.moshin.loan.controller;
 import java.util.List;
 import java.util.Optional;
 
-import com.moshin.loan.entity.Empresa;
+import com.moshin.loan.entity.table.Empresa;
 import com.moshin.loan.service.empresa.EmpresaService;
 
 import org.springframework.beans.factory.annotation.Autowired;

@@ -3,7 +3,7 @@ package com.moshin.loan.service.tipo_prestamo;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.moshin.loan.entity.TipoPrestamo;
+import com.moshin.loan.entity.table.TipoPrestamo;
 import com.moshin.loan.repository.TipoPrestamoRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
