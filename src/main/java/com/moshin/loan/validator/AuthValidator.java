@@ -6,7 +6,6 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class AuthValidator {
-    private static final String CLIENT_CREDEENTIALS = "client_credentials";
     
     public void validate(String cUsu, String cPass) throws ApiUnauthorized{
         if(cUsu.isEmpty() || cPass.isEmpty()){

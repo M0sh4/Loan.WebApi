@@ -1,7 +1,9 @@
 package com.moshin.loan.service.usuario;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.moshin.loan.entity.JwtResponse;
 import com.moshin.loan.entity.table.Usuario;
@@ -42,7 +44,10 @@ public class UsuarioServiceImpl implements UsuarioService {
                 return;
             }
         });
-        return JwtResponse.builder().tokenType("bearer").accessToken(jwtIO.generateToken("MOSHIN")).issuedAt(dateUtils.getDateMillis()+"")
+        Map<String, String> usuRes = new HashMap<>();
+        usuRes.put("name", listUsu.get(0).getCUsuario());
+        usuRes.put("tipoUser", listUsu.get(0).getCTipoUsuario());
+        return JwtResponse.builder().tokenType("bearer").accessToken(jwtIO.generateToken(usuRes)).issuedAt(dateUtils.getDateMillis()+"")
                 .userId(listUsu.get(0).getNId()).expiresIn(EXPIRES_IN).build();
     }
     

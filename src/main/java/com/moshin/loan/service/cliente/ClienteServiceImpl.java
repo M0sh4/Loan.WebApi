@@ -1,4 +1,5 @@
 package com.moshin.loan.service.cliente;
+import java.util.Date;
 import java.util.Optional;
 
 import com.moshin.loan.entity.table.Cliente;
@@ -30,6 +31,8 @@ public class ClienteServiceImpl implements ClienteService{
     @Override
     @Transactional
     public Cliente save(Cliente cliente) {
+        Date date = new Date();
+        cliente.setDtFechaReg(date);
         return clienteRepository.save(cliente);
     }
     

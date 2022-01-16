@@ -11,7 +11,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -29,17 +32,22 @@ public class Documento {
     private Long nId;
     
     @ManyToOne(cascade = CascadeType.REFRESH)
-    @JoinColumn(name = "cDni")
+    @JoinColumn(name = "cDni", nullable = false)
     private Cliente cliente;
     
     @ManyToOne(cascade = CascadeType.REFRESH)
-    @JoinColumn(name = "cRuc")
+    @JoinColumn(name = "cRuc", nullable = false)
     private Empresa empresa;
-    
-    @Column(length = 150)
+
+    @NotNull(message = "El campo nombre no puede ser nulo")
+    @NotEmpty(message = "El campo nombre no puede estar vacio")
+    @Column(length = 150, nullable = false)
     private String cNombre;
-    @Column
+
+    @Column(nullable = false)
+    @JsonFormat( pattern = "yyyy-MM-dd")
     private Date dtFechaReg;
-    @Column(length = 1)
-    private String cEstado;
+
+    @Column(nullable = false)
+    private boolean bActivo;
 }

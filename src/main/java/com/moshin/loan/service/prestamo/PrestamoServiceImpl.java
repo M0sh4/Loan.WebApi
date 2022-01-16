@@ -19,6 +19,7 @@ public class PrestamoServiceImpl implements PrestamoService{
     @Override
     @Transactional
     public Prestamo save(Prestamo prestamo) {
+        prestamo.setBActivo(true);
         return prestamoRepository.save(prestamo);
     }
 
@@ -50,7 +51,7 @@ public class PrestamoServiceImpl implements PrestamoService{
     @Transactional
     public Prestamo logicalDelete(Long id) {
         Prestamo prestamo = prestamoRepository.getById(id);
-        prestamo.setCEstado("0");
+        prestamo.setBActivo(false);
         return prestamoRepository.save(prestamo);
     }
     

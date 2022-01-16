@@ -2,6 +2,7 @@ package com.moshin.loan.service.empleado;
 
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,6 +22,9 @@ public class EmpleadoServiceImpl implements EmpleadoService{
     @Override
     @Transactional
     public Empleado save(Empleado empleado) {
+        Date date = new Date();
+        empleado.setDtFechaReg(date);
+        empleado.setBActivo(true);
         return empleadoRepository.save(empleado);
     }
 
@@ -28,7 +32,7 @@ public class EmpleadoServiceImpl implements EmpleadoService{
     @Transactional
     public Empleado logicalDelete(String cDni) {
         Empleado empleado = empleadoRepository.getById(cDni);
-        empleado.setCEstado("0");
+        empleado.setBActivo(false);
         return empleadoRepository.save(empleado);
     }
 

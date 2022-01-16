@@ -38,6 +38,6 @@ public class RecomendadoController {
     @PostMapping("/delete")
     public ResponseEntity<Boolean> logicalDelete(@RequestParam Long id){
         Recomendado recomendado = recomendadoService.logicalDelete(id);
-        return !recomendado.getCEstado().equals("0")? ResponseEntity.notFound().build(): ResponseEntity.ok(true);
+        return recomendado.isBActivo()? ResponseEntity.notFound().build(): ResponseEntity.ok(true);
     }
 }

@@ -2,12 +2,16 @@ package com.moshin.loan.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import com.moshin.loan.entity.table.ListaNegra;
+import com.moshin.loan.service.error.GeneralResponse;
 import com.moshin.loan.service.lista_negra.ListaNegraService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,11 +27,12 @@ public class ListaNegraController {
 
     @Autowired
     ListaNegraService listaNegraService;
+    @Autowired
+    GeneralResponse generalResponse;
 
     @PostMapping
-    public ResponseEntity<ListaNegra> saveList(@RequestBody ListaNegra listaNegra){
-        ListaNegra resList = listaNegraService.saveList(listaNegra);
-        return ResponseEntity.status(HttpStatus.CREATED).body(resList);
+    public ResponseEntity<Object> saveList(@RequestBody @Valid ListaNegra listaNegra, BindingResult result){
+        return result.hasErrors()? generalResponse.response(result): ResponseEntity.status(HttpStatus.CREATED).body(listaNegraService.saveList(listaNegra));
     }
     
     @GetMapping("/byRuc/{id}")
@@ -39,7 +44,7 @@ public class ListaNegraController {
     @PostMapping("/delete")
     public ResponseEntity<Boolean> logicalDelete(@RequestParam Long id){
         ListaNegra listaNegra = listaNegraService.logicalDelete(id);
-        return listaNegra.getCEstado().equals("1")? ResponseEntity.notFound().build(): ResponseEntity.ok(true);
+        return listaNegra.isBActivo()? ResponseEntity.notFound().build(): ResponseEntity.ok(true);
     }
     
 }

@@ -11,6 +11,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -25,17 +31,26 @@ public class TipoPrestamo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long nId;
-    
-    private String cPorcentaje;
+
+    @NotNull(message = "El campo procentaje no debe ser nulo")
+    @Min(message = "EL campo porcentaje debe ser mayor a 0", value = 1)
+    @Max(message = "El campo porcentaje debe ser menor o igual a 100", value = 100)
+    @Column(nullable = false)
+    private Integer nPorcentaje;
     
     @ManyToOne(cascade = CascadeType.REFRESH)
-    @JoinColumn(name = "cRuc")
+    @JoinColumn(name = "cRuc", nullable = false)
     private Empresa empresa;
 
-    @Column(length = 150)
+    @NotNull(message = "El campo nombre no debe ser nulo")
+    @NotEmpty(message = "El campo nombre no debe estar vacio")
+    @Column(length = 150, nullable = false)
     private String cNombre;
-    @Column
+
+    @Column(nullable = false)
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date dtFechaReg;
-    @Column(length = 1)
-    private String cEstado;
+
+    @Column(nullable = false)
+    private boolean bActivo;
 }

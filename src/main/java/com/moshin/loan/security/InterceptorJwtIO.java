@@ -44,8 +44,9 @@ public class InterceptorJwtIO implements HandlerInterceptor{
     private boolean excluded(String path){
         boolean result = false;
         for(String exc: excluded){
-            if(exc.equals("#") && exc.equals(path)){
+            if(exc.equals("#") || exc.equals(path)){
                 result = true;
+                break;
             }
         }
         return result;

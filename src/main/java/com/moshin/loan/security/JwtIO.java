@@ -3,7 +3,6 @@ package com.moshin.loan.security;
 import java.time.ZonedDateTime;
 import java.util.TimeZone;
 
-import com.google.gson.Gson;
 import com.moshin.loan.util.GsonUtils;
 
 import org.springframework.beans.factory.annotation.Value;

@@ -1,11 +1,13 @@
 package com.moshin.loan.util;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.format.datetime.DateFormatter;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -18,7 +20,7 @@ public class DateUtils {
         sdf.setTimeZone(TimeZone.getTimeZone(TIMEZONE));
         return sdf;
     }
-
+    
     public String getDateString(){
         Date now = new Date();
         return simpleDateFormat().format(now);

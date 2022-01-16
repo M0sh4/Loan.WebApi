@@ -2,12 +2,16 @@ package com.moshin.loan.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import com.moshin.loan.entity.table.Pago;
+import com.moshin.loan.service.error.GeneralResponse;
 import com.moshin.loan.service.pago.PagoService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,11 +26,12 @@ public class PagoController {
     
     @Autowired
     PagoService pagoService;
+    @Autowired
+    GeneralResponse generalResponse;
 
     @PostMapping
-    public ResponseEntity<Pago> savePago(@RequestBody Pago pago){
-        Pago resPago = pagoService.save(pago);
-        return ResponseEntity.status(HttpStatus.CREATED).body(resPago);
+    public ResponseEntity<Object> savePago(@RequestBody @Valid Pago pago, BindingResult result){
+        return result.hasErrors()? generalResponse.response(result): ResponseEntity.status(HttpStatus.CREATED).body(pagoService.save(pago));
     }
 
     @GetMapping("/{id}")
@@ -38,6 +43,6 @@ public class PagoController {
     @PostMapping("/delete")
     public ResponseEntity<Boolean> logicalDelete(@RequestParam Long id){
         Pago pago = pagoService.logicalDelete(id);
-        return !pago.getCEstado().equals("0")? ResponseEntity.notFound().build(): ResponseEntity.ok(true);
+        return pago.isBActivo()? ResponseEntity.notFound().build(): ResponseEntity.ok(true);
     }
 }

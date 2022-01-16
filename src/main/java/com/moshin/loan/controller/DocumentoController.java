@@ -1,13 +1,18 @@
 package com.moshin.loan.controller;
 
+import java.util.Date;
 import java.util.List;
+
+import javax.validation.Valid;
 
 import com.moshin.loan.entity.table.Documento;
 import com.moshin.loan.service.documento.DocumentoService;
+import com.moshin.loan.service.error.GeneralResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,12 +24,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/documento")
 public class DocumentoController {
     @Autowired
-    DocumentoService documentoService;
+    private DocumentoService documentoService;
+    @Autowired
+    private GeneralResponse generalResponse;
 
     @PostMapping("/save")
-    public ResponseEntity<Documento> saveDoc(@RequestBody Documento documento){
-        Documento docRes = documentoService.save(documento);
-        return ResponseEntity.status(HttpStatus.CREATED).body(docRes);
+    public ResponseEntity<Object> saveDoc(@RequestBody @Valid Documento documento, BindingResult result){
+        return result.hasErrors()? generalResponse.response(result): ResponseEntity.status(HttpStatus.CREATED).body(documentoService.save(documento));
     }
 
     @GetMapping

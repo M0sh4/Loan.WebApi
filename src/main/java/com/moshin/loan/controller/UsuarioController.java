@@ -1,14 +1,18 @@
 package com.moshin.loan.controller;
 
+import javax.validation.Valid;
+
 import com.moshin.loan.entity.JwtResponse;
 import com.moshin.loan.entity.table.Usuario;
 import com.moshin.loan.exceptions.ApiUnauthorized;
+import com.moshin.loan.service.error.GeneralResponse;
 import com.moshin.loan.service.usuario.UsuarioService;
 import com.moshin.loan.validator.AuthValidator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,11 +27,12 @@ public class UsuarioController {
     private UsuarioService usuarioService;
     @Autowired
     private AuthValidator validator;
+    @Autowired
+    private GeneralResponse generalResponse;
 
     @PostMapping("/save")
-    public ResponseEntity<Usuario> saveUsuario(@RequestBody Usuario usuario){
-        Usuario resUsu = usuarioService.save(usuario);
-        return ResponseEntity.status(HttpStatus.CREATED).body(resUsu);
+    public ResponseEntity<Object> saveUsuario(@RequestBody @Valid Usuario usuario, BindingResult result){
+        return result.hasErrors()? generalResponse.response(result): ResponseEntity.status(HttpStatus.CREATED).body(usuarioService.save(usuario));
     }
 
     @PostMapping("/login")

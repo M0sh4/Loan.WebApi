@@ -1,5 +1,6 @@
 package com.moshin.loan.service.pago;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.moshin.loan.entity.table.Pago;
@@ -18,6 +19,9 @@ public class PagoServiceImpl implements PagoService{
     @Override
     @Transactional
     public Pago save(Pago pago) {
+        Date date = new Date();
+        pago.setDtFecha(date);
+        pago.setBActivo(true);
         return pagoRepository.save(pago);
     }
 
@@ -37,7 +41,7 @@ public class PagoServiceImpl implements PagoService{
     @Transactional
     public Pago logicalDelete(Long id) {
         Pago pago = pagoRepository.getById(id);
-        pago.setCEstado("0");
+        pago.setBActivo(false);
         return pagoRepository.save(pago);
     }
     

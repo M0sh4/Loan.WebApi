@@ -1,6 +1,7 @@
 package com.moshin.loan.service.lista_negra;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.moshin.loan.entity.table.ListaNegra;
@@ -19,6 +20,9 @@ public class ListaNegraServiceImpl implements ListaNegraService{
     @Override
     @Transactional
     public ListaNegra saveList(ListaNegra listaNegra) {
+        Date date = new Date();
+        listaNegra.setBActivo(true);
+        listaNegra.setDtFechaReg(date);
         return listaNegraRepository.save(listaNegra);
     }
 
@@ -38,7 +42,7 @@ public class ListaNegraServiceImpl implements ListaNegraService{
     @Transactional
     public ListaNegra logicalDelete(Long id) {
         ListaNegra listaNegra = listaNegraRepository.getById(id);
-        listaNegra.setCEstado("0");
+        listaNegra.setBActivo(false);
         return listaNegraRepository.save(listaNegra);
     }
     

@@ -1,10 +1,12 @@
 package com.moshin.loan.service.documento;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.moshin.loan.entity.table.Documento;
 import com.moshin.loan.repository.DocumentoRepository;
+import com.moshin.loan.util.DateUtils;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +17,8 @@ public class DocumentoServiceImpl implements DocumentoService{
 
     @Autowired
     DocumentoRepository documentoRepository;
+    @Autowired
+    DateUtils dateUtils;
 
     @Override
     @Transactional(readOnly = true)
@@ -31,6 +35,9 @@ public class DocumentoServiceImpl implements DocumentoService{
     @Override
     @Transactional
     public Documento save(Documento documento) {
+        Date dateNow = new Date();
+        documento.setDtFechaReg(dateNow);
+        documento.setBActivo(true);
         return documentoRepository.save(documento);
     }
 

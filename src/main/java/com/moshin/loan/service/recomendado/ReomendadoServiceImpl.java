@@ -1,6 +1,7 @@
 package com.moshin.loan.service.recomendado;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.moshin.loan.entity.table.Recomendado;
@@ -19,6 +20,9 @@ public class ReomendadoServiceImpl implements RecomendadoService {
     @Override
     @Transactional
     public Recomendado save(Recomendado recomendado) {
+        Date date = new Date();
+        recomendado.setDtFechaReg(date);
+        recomendado.setBActivo(true);
         return recomendadoRepository.save(recomendado);
     }
 
@@ -38,7 +42,7 @@ public class ReomendadoServiceImpl implements RecomendadoService {
     @Transactional
     public Recomendado logicalDelete(Long id) {
         Recomendado recomendado = recomendadoRepository.getById(id);
-        recomendado.setCEstado("0");
+        recomendado.setBActivo(false);
         return recomendadoRepository.save(recomendado);
     }
     

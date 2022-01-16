@@ -1,6 +1,7 @@
 package com.moshin.loan.service.tipo_prestamo;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.moshin.loan.entity.table.TipoPrestamo;
@@ -19,6 +20,9 @@ public class TipoPrestamoServiceImpl implements TipoPrestamoService {
     @Override
     @Transactional
     public TipoPrestamo save(TipoPrestamo tipoPrestamo) {
+        Date date = new Date();
+        tipoPrestamo.setDtFechaReg(date);
+        tipoPrestamo.setBActivo(true);
         return tipoPrestamoRepository.save(tipoPrestamo);
     }
 
@@ -38,7 +42,7 @@ public class TipoPrestamoServiceImpl implements TipoPrestamoService {
     @Transactional
     public TipoPrestamo logicalDelete(Long id) {
         TipoPrestamo tipoPrestamo = tipoPrestamoRepository.getById(id);
-        tipoPrestamo.setCEstado("0");
+        tipoPrestamo.setBActivo(false);
         return tipoPrestamoRepository.save(tipoPrestamo);
     }
     

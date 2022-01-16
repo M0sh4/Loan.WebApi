@@ -11,6 +11,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -27,23 +33,33 @@ public class Prestamo {
     private Long nId;
 
     @ManyToOne(cascade = CascadeType.REFRESH)
-    @JoinColumn(name = "cDni")
+    @JoinColumn(name = "cDni", nullable = false)
     private Cliente cliente;
     
     @ManyToOne(cascade = CascadeType.REFRESH)
-    @JoinColumn(name = "cRuc")
+    @JoinColumn(name = "cRuc", nullable = false)
     private Empresa empresa;
 
-    @Column
-    private String nMonto;
-    @Column
+    @Min( message = "El campo monto no debe ser menor a 1", value = 1)
+    @Column(nullable = false)
+    private double nMonto;
+
+    //@DateTimeFormat(pattern = "yyyy-MM-dd")
+    @NotNull(message = "El campo fecha inicial no debe ser nulo")
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    @Column(nullable = false)
     private Date dtFechaIni;
-    @Column
+
+    //@DateTimeFormat(pattern = "yyyy-MM-dd")
+    @NotNull(message = "El campo fecha final no debe ser nulo")
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    @Column(nullable = false)
     private Date dtFechaFin;
-    @Column(length = 1)
-    private String cEstado;
+
+    @Column(nullable = false)
+    private boolean bActivo;
  
     @ManyToOne(cascade = CascadeType.REFRESH)
-    @JoinColumn(name = "nIdTipoPrestamo")
+    @JoinColumn(name = "nIdTipoPrestamo", nullable = false)
     private TipoPrestamo tipoPrestamo;
 }

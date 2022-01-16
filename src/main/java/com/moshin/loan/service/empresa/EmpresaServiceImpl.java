@@ -1,5 +1,6 @@
 package com.moshin.loan.service.empresa;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,6 +20,8 @@ public class EmpresaServiceImpl implements EmpresaService{
     @Override
     @Transactional
     public Empresa save(Empresa empresa) {
+        Date date = new Date();
+        empresa.setDtFechaReg(date);
         return empresaRepository.save(empresa);
     }
 
