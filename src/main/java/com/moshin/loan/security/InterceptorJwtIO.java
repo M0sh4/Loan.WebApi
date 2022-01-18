@@ -49,6 +49,9 @@ public class InterceptorJwtIO implements HandlerInterceptor{
                 break;
             }
         }
+        if(path.indexOf("/api/swagger-ui/")==0 || path.indexOf("/api/v3")==0){
+            result = true;
+        }
         return result;
     }
 }
